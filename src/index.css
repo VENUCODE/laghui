@@ -505,9 +505,11 @@ h6 {
   content: "";
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, black, black, transparent, transparent);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), transparent, transparent);
 
 }
+
+
 
 #hero .container {
   padding-top: 40px;
@@ -604,7 +606,7 @@ h6 {
 
 
   #hero::before {
-    background: linear-gradient(0deg, rgba(0, 13, 78, 1), rgba(0, 0, 0, 0.183));
+    background: linear-gradient(0deg, rgba(0, 13, 78, 0.607), rgba(0, 0, 0, 0.584));
   }
 
   .hero_text {
@@ -655,7 +657,10 @@ h6 {
 
   }
 
+  #hero::before {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.712), transparent, transparent);
 
+  }
 
   #hero .btn-watch-video {
     padding: 5px 10px;

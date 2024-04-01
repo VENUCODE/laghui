@@ -1,8 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
-import { NavLink } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/img/logo.jpeg";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 const Footer = () => {
+  useEffect(() => {
+    const onRouteChange = () => {
+      window.scrollTo(0, 0);
+    };
+
+    // Add event listener for route changes
+    window.addEventListener("hashchange", onRouteChange);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener("hashchange", onRouteChange);
+    };
+  }, []);
   return (
     <footer id="footer" className="footer">
       <div className="footer-top">
@@ -42,11 +55,13 @@ const Footer = () => {
               <ul>
                 <li>
                   <i className="bi bi-chevron-right"></i>{" "}
-                  <Link to="/">Home</Link>
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
                   <i className="bi bi-chevron-right"></i>{" "}
-                  <Link to="/about">About us</Link>
+                  <NavLink to="/about" className={"scroll-to"}>
+                    About us
+                  </NavLink>
                 </li>
                 <li>
                   <i className="bi bi-chevron-right"></i>{" "}

@@ -1,3 +1,4 @@
+import React, { useState, useEffect, Suspense } from "react";
 import "./assets/vendor/aos/aos.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "./assets/vendor/bootstrap/css/bootstrap.min.css";
@@ -19,20 +20,37 @@ import { Route, Routes } from "react-router-dom";
 import Resources from "./components/Resources/index.jsx";
 import Services from "./components/Services";
 import Blog from "./components/Resources/Blog.jsx";
+import Vlab from "./components/Home/Vlab.jsx";
+
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate async loading process
+    const timeout = setTimeout(() => {
+      setLoading(false); // Set loading to false after some time (simulating page load)
+    }, 3000); // Adjust this timeout as needed
+
+    // Cleanup function to clear timeout (important to prevent memory leaks)
+    return () => clearTimeout(timeout);
+  }, []);
+
   useWebsite();
+
   return (
     <>
       <Header />
       <Backtotop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/support" element={<Support />} />{" "}
-        <Route path="/resources" element={<Resources />} />{" "}
-        <Route path="/services" element={<Services />} />{" "}
-        <Route path="/vaajlab" element={<Blog />} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/vaajlab" element={<Vlab />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </>
   );

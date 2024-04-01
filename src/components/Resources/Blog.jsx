@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ui1, ui2, ui3, ui4, ui5 } from "../../assets/img/laghui_imgs";
 
 const blogPosts = [
@@ -7,21 +8,21 @@ const blogPosts = [
     date: "Tue, September 15",
     title:
       "Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit",
-    link: "blog-single.html",
+    link: "/resources",
   },
   {
     id: 2,
     image: ui5,
     date: "Fri, August 28",
     title: "Et repellendus molestiae qui est sed omnis voluptates magnam",
-    link: "blog-single.html",
+    link: "/resources",
   },
   {
     id: 3,
     image: ui1,
     date: "Mon, July 11",
     title: "Quia assumenda est et veritatis aut quae",
-    link: "blog-single.html",
+    link: "/resources",
   },
 ];
 
@@ -43,10 +44,13 @@ const Blog = () => {
                 </div>
                 <span className="post-date">{post.date}</span>
                 <h3 className="post-title">{post.title}</h3>
-                <a href={post.link} className="readmore stretched-link mt-auto">
+                <Link
+                  href={post.link}
+                  className="readmore stretched-link mt-auto"
+                >
                   <span>Read More</span>
                   <i className="bi bi-arrow-right"></i>
-                </a>
+                </Link>
               </div>
             </div>
           ))}

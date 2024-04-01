@@ -1,31 +1,40 @@
-import React, { useEffect, useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 import heroImage from "../../assets/img/hero-img.svg";
 import hero_bg_video from "../../assets/videos/hero_bg.mp4";
 import otvideo from "../../assets/videos/OT.mp4";
 import GLightbox from "glightbox";
-import { NavLink } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 const HeroVideo = () => {
   useEffect(() => {
-    const lightbox = GLightbox({
+    GLightbox({
       selector: ".glightbox",
     });
   });
-  const [isVideo, setIsVideo] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  const handleVideoLoaded = () => {
+    console.log("Video loaded successfully");
+    setIsVideoLoaded(true);
+  };
+  const VideoComponent = () => {
+    const handleVideoLoaded = () => {
+      console.log("Video loaded successfully");
+      setIsVideoLoaded(true);
+    };
+
+    return (
+      <video autoPlay muted loop id="myVideo" onLoadedData={handleVideoLoaded}>
+        <source src={hero_bg_video} type="video/mp4" />
+      </video>
+    );
+  };
 
   return (
     <section id="hero" className="d-flex align-items-center">
-      <video
-        autoPlay
-        onLoadedData={() => {
-          setIsVideo(true);
-        }}
-        muted
-        loop
-        id="myVideo"
-      >
-        <source src={hero_bg_video} type="video/mp4" />
-      </video>
+      <Suspense fallback={<div>Loading...</div>}>
+        <VideoComponent />
+      </Suspense>
       <div
         className="container position-absolute "
         data-aos="fade-up"
@@ -52,10 +61,7 @@ const HeroVideo = () => {
               Unifying Security Vision and Action for Total Protection{" "}
             </h2>
             <div className="d-flex justify-content-center justify-content-lg-start">
-              <NavLink
-                to="/support#contact"
-                className="btn-get-started scroll-to "
-              >
+              <NavLink to="/support" className="btn-get-started scroll-to ">
                 Get Started
               </NavLink>
               <a href={otvideo} className="glightbox btn-watch-video">
@@ -64,13 +70,15 @@ const HeroVideo = () => {
               </a>
             </div>
           </div>
-          {/* <div
-            className="col-lg-6 order-1 order-lg-2 hero-img"
-            data-aos="zoom-in"
-            data-aos-delay="200"
-          > */}
-          {/* <img src={heroImage} className="img-fluid bg " alt="hero image" /> */}
-          {/* </div> */}
+          {!isVideoLoaded && (
+            <div
+              className="col-lg-6 order-1 order-lg-2 hero-img animated"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <img src={heroImage} className="img-fluid bg " alt="hero image" />
+            </div>
+          )}
         </div>
       </div>
     </section>
