@@ -13,7 +13,7 @@ const Capabilities = () => {
     <section id="cababilites" className="cababilites ">
       <div className="container" data-aos="fade-up" data-aos-delay="200">
         <header className="section-title">
-          <h2>OUT KEY CAPABILITIES</h2>
+          <h2>OUR KEY CAPABILITIES</h2>
         </header>
 
         <div className="row">
